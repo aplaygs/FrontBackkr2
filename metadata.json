@@ -1,0 +1,6 @@
+{
+  "name": "Auth & RBAC Pro Manager",
+  "description": "A full-stack application featuring JWT authentication (Access/Refresh tokens), Role-Based Access Control (RBAC), and product management, built for educational purposes.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}
