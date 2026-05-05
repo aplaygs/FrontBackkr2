@@ -78,8 +78,8 @@ export default function Products() {
     <div className="max-w-7xl mx-auto px-4 py-12">
       <div className="flex justify-between items-center mb-12">
         <div>
-          <h1 className="text-4xl font-black text-white leading-tight tracking-tighter">DATA: <span className="text-zinc-500 uppercase">Inventory</span></h1>
-          <p className="text-zinc-500 font-mono text-xs mt-1 uppercase tracking-widest">Active nodes in the network architecture</p>
+          <h1 className="text-4xl font-black text-white leading-tight tracking-tighter">ДАННЫЕ: <span className="text-zinc-500 uppercase">Склад</span></h1>
+          <p className="text-zinc-500 font-mono text-xs mt-1 uppercase tracking-widest">Активные узлы в сетевой архитектуре</p>
         </div>
         {canManage && (
           <button
@@ -91,7 +91,7 @@ export default function Products() {
             className="flex items-center gap-2 bg-blue-600 text-white px-8 py-3.5 rounded-2xl font-black uppercase text-xs tracking-widest hover:bg-blue-500 transition-all shadow-[0_0_30px_rgba(37,99,235,0.2)]"
           >
             <Plus className="w-5 h-5" />
-            Provision Unit
+            Добавить Юнит
           </button>
         )}
       </div>
@@ -111,14 +111,14 @@ export default function Products() {
               className="bg-zinc-900 border border-zinc-800 rounded-[2.5rem] shadow-2xl w-full max-w-lg overflow-hidden relative"
             >
               <div className="px-8 py-6 border-b border-zinc-800 flex justify-between items-center bg-zinc-900/50">
-                <h2 className="text-lg font-black text-white uppercase tracking-widest">{editingProduct ? 'Modify Unit' : 'Initialize Unit'}</h2>
+                <h2 className="text-lg font-black text-white uppercase tracking-widest">{editingProduct ? 'Изменить Юнит' : 'Новый Юнит'}</h2>
                 <button onClick={() => setShowForm(false)} className="p-2 hover:bg-zinc-800 rounded-xl transition-colors">
                   <X className="w-5 h-5 text-zinc-500" />
                 </button>
               </div>
               <form onSubmit={handleSubmit} className="p-8 space-y-5">
                 <div>
-                  <label className="block text-[10px] font-black text-zinc-500 uppercase tracking-widest mb-2 ml-1">Asset Designation</label>
+                  <label className="block text-[10px] font-black text-zinc-500 uppercase tracking-widest mb-2 ml-1">Название Ассета</label>
                   <div className="relative">
                     <Package className="w-4 h-4 absolute left-4 top-1/2 -translate-y-1/2 text-zinc-600" />
                     <input
@@ -126,13 +126,13 @@ export default function Products() {
                       value={formData.title}
                       onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                       className="w-full pl-11 pr-4 py-3 bg-zinc-950 border border-zinc-800 rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none transition-all text-white placeholder:text-zinc-700 font-medium"
-                      placeholder="e.g. CORE-STATION-X"
+                      placeholder="напр. CORE-STATION-X"
                     />
                   </div>
                 </div>
                 <div className="grid grid-cols-2 gap-5">
                   <div>
-                    <label className="block text-[10px] font-black text-zinc-500 uppercase tracking-widest mb-2 ml-1">Domain</label>
+                    <label className="block text-[10px] font-black text-zinc-500 uppercase tracking-widest mb-2 ml-1">Домен (Категория)</label>
                     <div className="relative">
                       <Tag className="w-4 h-4 absolute left-4 top-1/2 -translate-y-1/2 text-zinc-600" />
                       <input
@@ -140,12 +140,12 @@ export default function Products() {
                         value={formData.category}
                         onChange={(e) => setFormData({ ...formData, category: e.target.value })}
                         className="w-full pl-11 pr-4 py-3 bg-zinc-950 border border-zinc-800 rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none transition-all text-white placeholder:text-zinc-700 font-medium"
-                        placeholder="Hardware"
+                        placeholder="Оборудование"
                       />
                     </div>
                   </div>
                   <div>
-                    <label className="block text-[10px] font-black text-zinc-500 uppercase tracking-widest mb-2 ml-1">Value (Credits)</label>
+                    <label className="block text-[10px] font-black text-zinc-500 uppercase tracking-widest mb-2 ml-1">Ценность (Кредиты)</label>
                     <div className="relative">
                       <DollarSign className="w-4 h-4 absolute left-4 top-1/2 -translate-y-1/2 text-zinc-600" />
                       <input
@@ -160,7 +160,7 @@ export default function Products() {
                   </div>
                 </div>
                 <div>
-                  <label className="block text-[10px] font-black text-zinc-500 uppercase tracking-widest mb-2 ml-1">Deployment Specs</label>
+                  <label className="block text-[10px] font-black text-zinc-500 uppercase tracking-widest mb-2 ml-1">Спецификации Развертывания</label>
                   <div className="relative">
                     <Info className="w-4 h-4 absolute left-4 top-4 text-zinc-600" />
                     <textarea
@@ -169,7 +169,7 @@ export default function Products() {
                       value={formData.description}
                       onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                       className="w-full pl-11 pr-4 py-3 bg-zinc-950 border border-zinc-800 rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none transition-all resize-none text-white placeholder:text-zinc-700 font-medium"
-                      placeholder="Detailed specifications..."
+                      placeholder="Подробные характеристики..."
                     />
                   </div>
                 </div>
@@ -179,13 +179,13 @@ export default function Products() {
                     onClick={() => setShowForm(false)}
                     className="flex-1 px-4 py-4 border border-zinc-800 rounded-2xl font-black uppercase text-xs tracking-widest text-zinc-500 hover:bg-zinc-800 transition-colors"
                   >
-                    Abort
+                    Отмена
                   </button>
                   <button
                     type="submit"
                     className="flex-1 px-4 py-4 bg-white text-zinc-950 rounded-2xl font-black uppercase text-xs tracking-widest hover:bg-blue-500 hover:text-white transition-all"
                   >
-                    {editingProduct ? 'Commit' : 'Initialize'}
+                    {editingProduct ? 'Применить' : 'Инициализировать'}
                   </button>
                 </div>
               </form>
@@ -201,8 +201,8 @@ export default function Products() {
       ) : products.length === 0 ? (
         <div className="text-center py-20 bg-zinc-900 border border-dashed border-zinc-800 rounded-[3rem]">
            <Package className="w-16 h-16 text-zinc-700 mx-auto mb-6 opacity-50" />
-           <h3 className="text-2xl font-black text-white uppercase tracking-tight">No active nodes</h3>
-           <p className="text-zinc-500 mt-2 font-mono text-xs uppercase">Wait for unit provisioning</p>
+           <h3 className="text-2xl font-black text-white uppercase tracking-tight">Нет активных узлов</h3>
+           <p className="text-zinc-500 mt-2 font-mono text-xs uppercase">Ожидание поставки юнитов</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
@@ -244,11 +244,11 @@ export default function Products() {
 
                 <div className="flex justify-between items-end border-t border-zinc-800 pt-6 mt-auto">
                   <div className="flex flex-col">
-                    <span className="text-[9px] text-zinc-500 font-black uppercase tracking-widest mb-1">Asset Value</span>
-                    <span className="text-3xl font-black text-white leading-none">${product.price.toLocaleString()}</span>
+                    <span className="text-[9px] text-zinc-500 font-black uppercase tracking-widest mb-1">Стоимость актива</span>
+                    <span className="text-3xl font-black text-white leading-none">{product.price.toLocaleString()} ₽</span>
                   </div>
                   <div className="bg-emerald-500/10 text-emerald-400 text-[10px] font-black px-3 py-1.5 rounded-lg border border-emerald-500/20 uppercase tracking-widest">
-                    Operational
+                    Активен
                   </div>
                 </div>
               </motion.div>

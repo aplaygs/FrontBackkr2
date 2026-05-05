@@ -51,9 +51,9 @@ export default function Admin() {
           <div className="bg-blue-600 p-2 rounded-xl shadow-[0_0_20px_rgba(37,99,235,0.4)]">
             <ShieldCheck className="w-8 h-8 text-white" />
           </div>
-          <h1 className="text-4xl font-black leading-tight tracking-tighter uppercase">Security: <span className="text-zinc-500">Personnel</span></h1>
+          <h1 className="text-4xl font-black leading-tight tracking-tighter uppercase">Безопасность: <span className="text-zinc-500">Персонал</span></h1>
         </div>
-        <p className="text-zinc-500 font-mono text-xs uppercase tracking-[0.2em] mt-2">Manage unit access levels and identity verification</p>
+        <p className="text-zinc-500 font-mono text-xs uppercase tracking-[0.2em] mt-2">Управление уровнями доступа и верификация личностей</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
@@ -63,7 +63,7 @@ export default function Admin() {
           </div>
           <div>
             <div className="text-3xl font-black text-white">{users.length}</div>
-            <div className="text-[10px] text-zinc-500 font-black uppercase tracking-widest">Active Units</div>
+            <div className="text-[10px] text-zinc-500 font-black uppercase tracking-widest">Активные Юниты</div>
           </div>
         </div>
         <div className="bento-card border-zinc-800 flex items-center gap-6">
@@ -72,7 +72,7 @@ export default function Admin() {
           </div>
           <div>
             <div className="text-3xl font-black text-white">{users.filter(u => u.role === Role.ADMIN).length}</div>
-            <div className="text-[10px] text-zinc-500 font-black uppercase tracking-widest">Admins</div>
+            <div className="text-[10px] text-zinc-500 font-black uppercase tracking-widest">Администраторы</div>
           </div>
         </div>
         <div className="bento-card border-zinc-800 flex items-center gap-6">
@@ -81,7 +81,7 @@ export default function Admin() {
           </div>
           <div>
             <div className="text-3xl font-black text-white">{users.filter(u => u.role === Role.SELLER).length}</div>
-            <div className="text-[10px] text-zinc-500 font-black uppercase tracking-widest">Sellers</div>
+            <div className="text-[10px] text-zinc-500 font-black uppercase tracking-widest">Продавцы</div>
           </div>
         </div>
       </div>
@@ -91,9 +91,9 @@ export default function Admin() {
           <table className="w-full text-left border-collapse">
             <thead>
               <tr className="bg-zinc-950/50 border-b border-zinc-800">
-                <th className="px-8 py-6 text-[10px] font-black text-zinc-500 uppercase tracking-[0.2em]">Agent Identity</th>
-                <th className="px-8 py-6 text-[10px] font-black text-zinc-500 uppercase tracking-[0.2em]">Privilege Level</th>
-                <th className="px-8 py-6 text-[10px] font-black text-zinc-500 uppercase tracking-[0.2em] text-right">Operations</th>
+                <th className="px-8 py-6 text-[10px] font-black text-zinc-500 uppercase tracking-[0.2em]">Профиль Агента</th>
+                <th className="px-8 py-6 text-[10px] font-black text-zinc-500 uppercase tracking-[0.2em]">Уровень Привилегий</th>
+                <th className="px-8 py-6 text-[10px] font-black text-zinc-500 uppercase tracking-[0.2em] text-right">Операции</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-zinc-800/50">
@@ -102,17 +102,17 @@ export default function Admin() {
                   <td colSpan={3} className="px-8 py-20 text-center text-zinc-500">
                     <div className="flex justify-center flex-col items-center gap-4">
                       <div className="w-10 h-10 border-4 border-blue-500 border-t-transparent rounded-full animate-spin" />
-                      <span className="font-black text-xs uppercase tracking-widest">Scanning network...</span>
+                      <span className="font-black text-xs uppercase tracking-widest">Сканирование сети...</span>
                     </div>
                   </td>
                 </tr>
               ) : users.length === 0 ? (
                 <tr>
-                  <td colSpan={3} className="px-8 py-20 text-center text-zinc-500 uppercase font-bold tracking-widest">Clearance: NO_DATA</td>
+                  <td colSpan={3} className="px-8 py-20 text-center text-zinc-500 uppercase font-bold tracking-widest">Доступ: ДАННЫЕ_ОТСУТСТВУЮТ</td>
                 </tr>
               ) : (
                 users.map((user) => (
-                  <motion.tr 
+                  <motion.tr
                     key={user.id}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
@@ -138,9 +138,9 @@ export default function Admin() {
                         onChange={(e) => updateRole(user.id, e.target.value as Role)}
                         className="bg-zinc-950 border border-zinc-800 text-white text-xs rounded-xl focus:ring-2 focus:ring-blue-500 block w-44 p-3 font-black uppercase tracking-widest appearance-none cursor-pointer hover:border-zinc-600 transition-all shadow-inner"
                       >
-                        <option value={Role.USER}>Standard User</option>
-                        <option value={Role.SELLER}>Authorized Seller</option>
-                        <option value={Role.ADMIN}>System Admin</option>
+                        <option value={Role.USER}>Пользователь</option>
+                        <option value={Role.SELLER}>Продавец</option>
+                        <option value={Role.ADMIN}>Администратор</option>
                       </select>
                     </td>
                     <td className="px-8 py-6 text-right">
@@ -148,7 +148,7 @@ export default function Admin() {
                         onClick={() => deleteUser(user.id)}
                         disabled={user.email === 'admin@example.com'}
                         className="p-3 bg-zinc-950 border border-zinc-800 text-zinc-500 hover:text-red-500 hover:border-red-500/30 rounded-2xl transition-all disabled:opacity-10 disabled:cursor-not-allowed shadow-sm"
-                        title="Decommission Unit"
+                        title="Деактивировать Юнит"
                       >
                         <Trash2 className="w-5 h-5" />
                       </button>

@@ -42,8 +42,8 @@ export default function Login() {
           <div className="bg-blue-500/10 w-16 h-16 rounded-2xl border border-blue-500/20 flex items-center justify-center mx-auto mb-6">
             <LogIn className="w-8 h-8 text-blue-500" />
           </div>
-          <h1 className="text-3xl font-black tracking-tight text-white uppercase">System Access</h1>
-          <p className="text-zinc-500 text-sm mt-2 font-mono uppercase tracking-widest">Entry Node ID: 0x992</p>
+          <h1 className="text-3xl font-black tracking-tight text-white uppercase">Доступ к Системе</h1>
+          <p className="text-zinc-500 text-sm mt-2 font-mono uppercase tracking-widest">Узел входа: 0x992</p>
         </div>
 
         {error && (
@@ -59,7 +59,7 @@ export default function Login() {
 
         <form onSubmit={handleSubmit} className="space-y-6 relative z-10">
           <div>
-            <label className="block text-[10px] font-black text-zinc-500 uppercase tracking-widest mb-2 ml-1">Protocol Identifier</label>
+            <label className="block text-[10px] font-black text-zinc-500 uppercase tracking-widest mb-2 ml-1">Идентификатор Протокола (Email)</label>
             <div className="relative">
               <Mail className="w-5 h-5 absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500" />
               <input
@@ -74,7 +74,7 @@ export default function Login() {
           </div>
 
           <div>
-            <label className="block text-[10px] font-black text-zinc-500 uppercase tracking-widest mb-2 ml-1">Access Cipher</label>
+            <label className="block text-[10px] font-black text-zinc-500 uppercase tracking-widest mb-2 ml-1">Шифр Доступа (Пароль)</label>
             <div className="relative">
               <Lock className="w-5 h-5 absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500" />
               <input
@@ -95,14 +95,14 @@ export default function Login() {
           >
             {loading ? (
               <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin" />
-            ) : 'Authorize Entry'}
+            ) : 'Авторизовать Вход'}
           </button>
         </form>
 
         <p className="mt-10 text-center text-zinc-600 text-xs font-bold uppercase tracking-wider relative z-10">
-          Unregistered Unit?{' '}
+          Новое Устройство?{' '}
           <Link to="/register" className="text-white hover:text-blue-400 transition-colors">
-            Init Request
+            Инициализировать Запрос
           </Link>
         </p>
       </motion.div>

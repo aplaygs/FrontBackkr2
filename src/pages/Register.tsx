@@ -49,8 +49,8 @@ export default function Register() {
           <div className="bg-emerald-500/10 w-16 h-16 rounded-2xl border border-emerald-500/20 flex items-center justify-center mx-auto mb-6">
             <UserPlus className="w-8 h-8 text-emerald-500" />
           </div>
-          <h1 className="text-3xl font-black tracking-tight text-white uppercase">Initialize unit</h1>
-          <p className="text-zinc-500 text-sm mt-2 font-mono uppercase tracking-widest">Protocol: NEW_NODE_GEN</p>
+          <h1 className="text-3xl font-black tracking-tight text-white uppercase">Инициализация Юнита</h1>
+          <p className="text-zinc-500 text-sm mt-2 font-mono uppercase tracking-widest">Протокол: НОВАЯ_ГЕНЕРАЦИЯ</p>
         </div>
 
         {error && (
@@ -63,14 +63,14 @@ export default function Register() {
         {success && (
           <div className="mb-6 p-4 bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 rounded-2xl flex items-center gap-3 text-sm font-bold">
             <CheckCircle className="w-5 h-5 flex-shrink-0" />
-            <span>Validation Success. Redirecting...</span>
+            <span>Проверка Пройдена. Перенаправляем...</span>
           </div>
         )}
 
         <form onSubmit={handleSubmit} className="space-y-4 relative z-10">
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-[10px] font-black text-zinc-500 uppercase tracking-widest mb-1 ml-1">Alias Name</label>
+              <label className="block text-[10px] font-black text-zinc-500 uppercase tracking-widest mb-1 ml-1">Имя (Alias)</label>
               <div className="relative">
                 <User className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500" />
                 <input
@@ -79,12 +79,12 @@ export default function Register() {
                   value={formData.first_name}
                   onChange={handleChange}
                   className="block w-full pl-9 pr-4 py-3 bg-zinc-950 border border-zinc-800 rounded-2xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none transition-all text-sm text-white"
-                  placeholder="John"
+                  placeholder="Иван"
                 />
               </div>
             </div>
             <div>
-              <label className="block text-[10px] font-black text-zinc-500 uppercase tracking-widest mb-1 ml-1">Surname</label>
+              <label className="block text-[10px] font-black text-zinc-500 uppercase tracking-widest mb-1 ml-1">Фамилия</label>
               <div className="relative">
                 <User className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500" />
                 <input
@@ -93,14 +93,14 @@ export default function Register() {
                   value={formData.last_name}
                   onChange={handleChange}
                   className="block w-full pl-9 pr-4 py-3 bg-zinc-950 border border-zinc-800 rounded-2xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none transition-all text-sm text-white"
-                  placeholder="Doe"
+                  placeholder="Иванов"
                 />
               </div>
             </div>
           </div>
 
           <div>
-            <label className="block text-[10px] font-black text-zinc-500 uppercase tracking-widest mb-1 ml-1">Network Identity</label>
+            <label className="block text-[10px] font-black text-zinc-500 uppercase tracking-widest mb-1 ml-1">Сетевая Идентификация (Email)</label>
             <div className="relative">
               <Mail className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500" />
               <input
@@ -110,13 +110,13 @@ export default function Register() {
                 value={formData.email}
                 onChange={handleChange}
                 className="block w-full pl-9 pr-4 py-3 bg-zinc-950 border border-zinc-800 rounded-2xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none transition-all text-sm text-white"
-                placeholder="john@node.local"
+                placeholder="ivan@node.local"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-[10px] font-black text-zinc-500 uppercase tracking-widest mb-1 ml-1">Access Cipher</label>
+            <label className="block text-[10px] font-black text-zinc-500 uppercase tracking-widest mb-1 ml-1">Шифр Доступа (Пароль)</label>
             <div className="relative">
               <Lock className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500" />
               <input
@@ -138,14 +138,14 @@ export default function Register() {
           >
             {loading ? (
               <div className="w-6 h-6 border-2 border-zinc-950 border-t-transparent rounded-full animate-spin" />
-            ) : 'Register Node'}
+            ) : 'Регистрация Узла'}
           </button>
         </form>
 
         <p className="mt-10 text-center text-zinc-600 text-xs font-bold uppercase tracking-wider relative z-10">
-          Already synced?{' '}
+          Уже в системе?{' '}
           <Link to="/login" className="text-white hover:text-emerald-400 transition-colors">
-            Login Node
+            Войти в Узел
           </Link>
         </p>
       </motion.div>

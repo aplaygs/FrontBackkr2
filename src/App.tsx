@@ -47,7 +47,7 @@ function Home() {
           <div className="relative z-10 mt-12">
             <div className="flex justify-between items-end mb-4">
               <span className="text-[10px] text-zinc-500 font-black uppercase tracking-widest">Системная нагрузка</span>
-              <span className="text-xs text-blue-400 font-mono italic">Operational: 24/7</span>
+              <span className="text-xs text-blue-400 font-mono italic">Работа: 24/7</span>
             </div>
             <div className="h-2 bg-zinc-800 w-full rounded-full overflow-hidden">
               <motion.div 
@@ -66,7 +66,7 @@ function Home() {
               <ShieldCheck className="w-8 h-8" />
             </div>
             <div className="text-zinc-950">
-              <h3 className="text-xl font-black mb-1 uppercase tracking-tight">JWT Security</h3>
+              <h3 className="text-xl font-black mb-1 uppercase tracking-tight">Безопасность JWT</h3>
               <p className="text-zinc-950/70 text-sm font-medium leading-snug">Шифрование токенов с использованием алгоритма HS256.</p>
             </div>
           </div>
@@ -99,12 +99,12 @@ export default function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               
-              {/* Authenticated Routes */}
+              {/* Авторизованные маршруты */}
               <Route element={<ProtectedRoute />}>
                 <Route path="/products" element={<Products />} />
               </Route>
               
-              {/* Admin Routes */}
+              {/* Маршруты админа */}
               <Route element={<ProtectedRoute allowedRoles={[Role.ADMIN]} />}>
                 <Route path="/admin" element={<Admin />} />
               </Route>
@@ -112,9 +112,9 @@ export default function App() {
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
           </main>
-          <footer className="py-8 border-t border-gray-100 bg-white">
-            <div className="max-w-7xl mx-auto px-4 text-center text-gray-400 text-sm font-medium">
-              &copy; 2026 RBAC Pro System. Educational Full-stack Assignment.
+          <footer className="py-8 border-t border-zinc-900 bg-zinc-950">
+            <div className="max-w-7xl mx-auto px-4 text-center text-zinc-700 text-sm font-medium uppercase tracking-[0.3em]">
+              &copy; 2026 QUANTUM SYSTEM. Учебный проект.
             </div>
           </footer>
         </div>

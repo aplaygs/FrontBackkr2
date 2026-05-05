@@ -25,11 +25,11 @@ export default function Navbar() {
             </Link>
             <div className="hidden sm:ml-10 sm:flex sm:space-x-8">
               <Link to="/products" className="inline-flex items-center px-1 pt-1 text-sm font-bold text-zinc-400 hover:text-white border-b-2 border-transparent hover:border-blue-500 transition-all uppercase tracking-widest">
-                Products
+                Товары
               </Link>
               {user?.role === Role.ADMIN && (
                 <Link to="/admin" className="inline-flex items-center px-1 pt-1 text-sm font-bold text-zinc-400 hover:text-white border-b-2 border-transparent hover:border-blue-500 transition-all uppercase tracking-widest">
-                  Admin Panel
+                  Админ-панель
                 </Link>
               )}
             </div>
@@ -38,7 +38,7 @@ export default function Navbar() {
             {user ? (
               <>
                 <div className="flex flex-col items-end">
-                  <span className="text-[10px] text-zinc-500 font-black uppercase tracking-[0.2em] mb-0.5">Authorized</span>
+                  <span className="text-[10px] text-zinc-500 font-black uppercase tracking-[0.2em] mb-0.5">Авторизован</span>
                   <div className="flex items-center gap-2">
                     <span className="text-sm font-bold text-white">{user.first_name}</span>
                     <span className="text-[9px] text-blue-400 font-mono border border-blue-500/30 px-1.5 py-0.5 rounded-md bg-blue-500/10 uppercase tracking-tighter">{user.role}</span>
@@ -47,15 +47,15 @@ export default function Navbar() {
                 <button
                   onClick={handleLogout}
                   className="p-3 rounded-2xl bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-red-400 hover:border-red-500/50 transition-all"
-                  title="Logout"
+                  title="Выйти"
                 >
                   <LogOut className="w-5 h-5" />
                 </button>
               </>
             ) : (
               <div className="flex items-center gap-4">
-                <Link to="/login" className="text-zinc-400 hover:text-white text-sm font-bold uppercase tracking-widest transition-colors">Login</Link>
-                <Link to="/register" className="bg-white text-zinc-950 px-6 py-2.5 rounded-full font-black text-sm uppercase tracking-widest hover:bg-blue-500 hover:text-white transition-all shadow-xl shadow-white/5">Sign Up</Link>
+                <Link to="/login" className="text-zinc-400 hover:text-white text-sm font-bold uppercase tracking-widest transition-colors">Вход</Link>
+                <Link to="/register" className="bg-white text-zinc-950 px-6 py-2.5 rounded-full font-black text-sm uppercase tracking-widest hover:bg-blue-500 hover:text-white transition-all shadow-xl shadow-white/5">Регистрация</Link>
               </div>
             )}
           </div>

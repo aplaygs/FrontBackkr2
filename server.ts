@@ -43,15 +43,15 @@ let users: User[] = [
   {
     id: 'admin_id',
     email: 'admin@example.com',
-    first_name: 'Admin',
-    last_name: 'Super',
-    passwordHash: '$2b$10$YnByR7GzVpD6KjI0yvE6Ou5tU/u8k5I8pZ.wP9E9S2.VvjP6A6qW6', // password: admin
+    first_name: 'Админ',
+    last_name: 'Системы',
+    passwordHash: bcrypt.hashSync('admin', 10), // пароль: admin
     role: Role.ADMIN
   }
 ];
 let products: Product[] = [
-  { id: '1', title: 'Smartphone X', category: 'Electronics', description: 'Powerful flagship.', price: 999 },
-  { id: '2', title: 'Laptop Pro', category: 'Computers', description: 'Best for work.', price: 1499 }
+  { id: '1', title: 'Смартфон X', category: 'Электроника', description: 'Мощный флагман с отличной камерой.', price: 99000 },
+  { id: '2', title: 'Ноутбук Pro', category: 'Компьютеры', description: 'Лучшее решение для работы и дизайна.', price: 145000 }
 ];
 let refreshTokens = new Set<string>();
 
@@ -67,7 +67,7 @@ async function startServer() {
   const authMiddleware = (req: any, res: any, next: any) => {
     const authHeader = req.headers.authorization;
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
-      return res.status(401).json({ error: 'Missing or invalid Authorization header' });
+      return res.status(401).json({ error: 'Отсутствует или неверный заголовок авторизации' });
     }
 
     const token = authHeader.split(' ')[1];
@@ -76,14 +76,14 @@ async function startServer() {
       req.user = payload;
       next();
     } catch (err) {
-      return res.status(401).json({ error: 'Invalid or expired access token' });
+      return res.status(401).json({ error: 'Токен доступа недействителен или истек' });
     }
   };
 
   const roleMiddleware = (allowedRoles: Role[]) => {
     return (req: any, res: any, next: any) => {
       if (!req.user || !allowedRoles.includes(req.user.role)) {
-        return res.status(403).json({ error: 'Forbidden: Insufficient permissions' });
+        return res.status(403).json({ error: 'Доступ запрещен: недостаточно прав' });
       }
       next();
     };
@@ -94,11 +94,11 @@ async function startServer() {
   app.post('/api/auth/register', async (req, res) => {
     const { email, first_name, last_name, password } = req.body;
     if (!email || !password || !first_name || !last_name) {
-      return res.status(400).json({ error: 'All fields are required' });
+      return res.status(400).json({ error: 'Все поля обязательны для заполнения' });
     }
 
     if (users.find(u => u.email === email)) {
-      return res.status(409).json({ error: 'Email already exists' });
+      return res.status(409).json({ error: 'Этот Email уже зарегистрирован' });
     }
 
     const passwordHash = await bcrypt.hash(password, 10);
@@ -108,7 +108,7 @@ async function startServer() {
       first_name,
       last_name,
       passwordHash,
-      role: Role.USER // Default role
+      role: Role.USER // Роль по умолчанию
     };
 
     users.push(newUser);
@@ -120,7 +120,7 @@ async function startServer() {
     const user = users.find(u => u.email === email);
 
     if (!user || !(await bcrypt.compare(password, user.passwordHash))) {
-      return res.status(401).json({ error: 'Invalid credentials' });
+      return res.status(401).json({ error: 'Неверные учетные данные' });
     }
 
     const accessToken = jwt.sign(
@@ -143,15 +143,15 @@ async function startServer() {
   app.post('/api/auth/refresh', (req, res) => {
     const { refreshToken } = req.body;
     if (!refreshToken || !refreshTokens.has(refreshToken)) {
-      return res.status(401).json({ error: 'Invalid refresh token' });
+      return res.status(401).json({ error: 'Недействительный токен обновления' });
     }
 
     try {
       const payload: any = jwt.verify(refreshToken, REFRESH_SECRET);
       const user = users.find(u => u.id === payload.sub);
-      if (!user) return res.status(401).json({ error: 'User not found' });
+      if (!user) return res.status(401).json({ error: 'Пользователь не найден' });
 
-      // Rotation
+      // Ротация
       refreshTokens.delete(refreshToken);
 
       const newAccessToken = jwt.sign(
@@ -170,13 +170,13 @@ async function startServer() {
 
       res.json({ accessToken: newAccessToken, refreshToken: newRefreshToken });
     } catch (err) {
-      return res.status(401).json({ error: 'Invalid refresh token' });
+      return res.status(401).json({ error: 'Ошибка обновления токена' });
     }
   });
 
   app.get('/api/auth/me', authMiddleware, (req: any, res) => {
     const user = users.find(u => u.id === req.user.sub);
-    if (!user) return res.status(404).json({ error: 'User not found' });
+    if (!user) return res.status(404).json({ error: 'Пользователь не найден' });
     
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { passwordHash, ...safeUser } = user;
@@ -191,14 +191,14 @@ async function startServer() {
 
   app.get('/api/users/:id', authMiddleware, roleMiddleware([Role.ADMIN]), (req, res) => {
     const user = users.find(u => u.id === req.params.id);
-    if (!user) return res.status(404).json({ error: 'User not found' });
+    if (!user) return res.status(404).json({ error: 'Пользователь не найден' });
     const { passwordHash, ...u } = user;
     res.json(u);
   });
 
   app.put('/api/users/:id', authMiddleware, roleMiddleware([Role.ADMIN]), (req, res) => {
     const userIndex = users.findIndex(u => u.id === req.params.id);
-    if (userIndex === -1) return res.status(404).json({ error: 'User not found' });
+    if (userIndex === -1) return res.status(404).json({ error: 'Пользователь не найден' });
 
     const { first_name, last_name, role } = req.body;
     users[userIndex] = { ...users[userIndex], first_name, last_name, role };
@@ -213,14 +213,12 @@ async function startServer() {
   // --- Products Routes ---
 
   app.get('/api/products', (req, res) => {
-    // Open for all (Guest too) or limited to Users? Assignment says "User - only viewing"
-    // Usually catalog is public but for simplicity we keep it open.
     res.json(products);
   });
 
   app.get('/api/products/:id', (req, res) => {
     const product = products.find(p => p.id === req.params.id);
-    if (!product) return res.status(404).json({ error: 'Product not found' });
+    if (!product) return res.status(404).json({ error: 'Товар не найден' });
     res.json(product);
   });
 
@@ -233,7 +231,7 @@ async function startServer() {
 
   app.put('/api/products/:id', authMiddleware, roleMiddleware([Role.SELLER, Role.ADMIN]), (req, res) => {
     const index = products.findIndex(p => p.id === req.params.id);
-    if (index === -1) return res.status(404).json({ error: 'Product not found' });
+    if (index === -1) return res.status(404).json({ error: 'Товар не найден' });
 
     const { title, category, description, price } = req.body;
     products[index] = { ...products[index], title, category, description, price: Number(price) };
@@ -244,6 +242,7 @@ async function startServer() {
     products = products.filter(p => p.id !== req.params.id);
     res.json({ success: true });
   });
+
 
   // --- Vite Dev Server Setup ---
 
